@@ -65,7 +65,7 @@ passport.deserializeUser(function(user, done) {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/google/secrets",
+    callbackURL: `${process.env.URL}/auth/google/secrets`,
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   },
   function(accessToken, refreshToken, profile, cb) {
@@ -79,7 +79,7 @@ passport.use(new GoogleStrategy({
 passport.use(new TwitterStrategy({
         consumerKey: process.env.APIKEY_TWITTER,
         consumerSecret: process.env.APISECRET_TWITTER,
-        callbackURL: "http://www.localhost:3000/auth/twitter/secrets"
+        callbackURL: `${process.env.URL}/auth/twitter/secrets`
     },
     function(token, tokenSecret, profile, cb) {
         User.findOrCreate({ twitterId: profile.id }, function (err, user) {
